@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from "src/environments/environment";
 
+import { SwalPopupService } from 'src/app/services/LocalServices/swal-popup.service';
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -34,13 +36,19 @@ export class LandingComponent implements OnInit {
   /** Id del card seleccionado */
   public idCardSelected = 0;
 
-  constructor() { }
+  constructor(
+    private toast: SwalPopupService,
+  ) { }
 
   ngOnInit(): void {
   }
 
   login = () => {
     window.location.href = `${environment.gcriskUrl}/Login`;
+  }
+
+  typeClothes = (idCard: any) => {
+    this.toast.setToastPopup('entrea' + idCard, 'success')
   }
 
 }

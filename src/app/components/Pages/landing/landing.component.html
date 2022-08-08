@@ -12,7 +12,7 @@
   <div class="row">
     <ng-container *ngFor="let card of listCards; index as i">
       <div class="col s12 m6 l4 margin-bottom-100-rem">
-        <div class="primary-card display-flex align-items-center border-card" [ngStyle]="{'border-color':card.color + '66',
+        <div class="primary-card display-flex align-items-center border-card hoverable-card" (click)="typeClothes(card.id)" [ngStyle]="{'border-color':card.color + '66',
           background: card.color + '66' }">
           <i [class]="card.icon + ' margin-right-100-rem'" [ngStyle]="{ color: card.color }"></i>
           <p class="text-style margin-vertical-0 lower-font font-weight-700-important cl-primary-color-theme-important">
