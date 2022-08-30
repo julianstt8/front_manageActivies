@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from "src/environments/environment";
 
 import { SwalPopupService } from 'src/app/services/LocalServices/swal-popup.service';
+import { HeroesService } from "src/app/services/heroes.service";
 
 @Component({
   selector: 'app-landing',
@@ -38,6 +39,7 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private toast: SwalPopupService,
+    private auth: HeroesService,
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +50,10 @@ export class LandingComponent implements OnInit {
   }
 
   typeClothes = (idCard: any) => {
-    this.toast.setToastPopup('entrea' + idCard, 'success')
+    this.auth.validateUser().subscribe((response) => {
+      console.log(response);
+      this.toast.setToastPopup('entrea' + response, 'success')
+    })
   }
 
 }

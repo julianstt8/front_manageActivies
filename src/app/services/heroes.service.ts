@@ -7,11 +7,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class HeroesService {
-  private url = `${environment.apiUrl}heroe`;
+  private url = `${environment.apiUrl}auth`;
 
   constructor(private http: HttpClient) { }
 
-  public getHeroes = () =>
-    this.http.get(`${this.url}/getHeroes`);
+  public validateUser = () =>
+    this.http.get(`${this.url}/validateUser`);
 
 }
