@@ -50,9 +50,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login = () => {
+  login = (log = 'logIn') => {
+    if (log == 'logOut') this.statusSession = false;
     if (!this.statusSession) {
       window.location.href = `${environment.gcriskUrl}/Login`;
+    }else{
+      window.location.href = `${environment.gcriskUrl}/Landing`;
     }
   }
 
