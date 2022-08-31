@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  storageUrl: 'http://192.168.2.80:9900/storage/',
-  urlImage: 'http://192.168.2.80:4400/assets/',
-  apiUrl: 'http://192.168.2.80:9900/api/',
-  gcriskUrl: 'http://192.168.2.80:4400',
+  storageUrl: 'http://192.168.80.18:9900/storage/',
+  urlImage: 'http://192.168.80.18:4400/assets/',
+  apiUrl: 'http://192.168.80.18:9900/api/',
+  gcriskUrl: 'http://192.168.80.18:4400',
   production: false,
 };
 
