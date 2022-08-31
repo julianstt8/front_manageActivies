@@ -7,6 +7,7 @@ import { LandingComponent } from './landing/landing.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'Login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+  { path: 'Dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
 ];
 
 const COMPONENTS = [

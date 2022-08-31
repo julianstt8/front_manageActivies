@@ -14,6 +14,6 @@ export class LoginComponent implements OnInit {
   }
 
   goBack = () => {
-window.location.href = `${environment.gcriskUrl}/`;
+    window.location.href = `${environment.gcriskUrl}/`;
   }
 }

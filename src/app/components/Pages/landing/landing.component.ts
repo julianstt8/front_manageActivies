@@ -12,23 +12,29 @@ import { HeroesService } from "src/app/services/heroes.service";
 
 export class LandingComponent implements OnInit {
 
+  /** Ruta para imagenes angular */
+  public urlImageAngular = environment.urlImage;
+  public storageUrl = environment.storageUrl;
+
+  public statusSession = false;
+
   /** Listado de cards a mostrar */
   public listCards = [
     {
       id: 0,
-      name: 'Mujer',
+      name: 'Ver actividades',
       color: '#9F84F9',
       icon: 'fas fa-percent',
     },
     {
       id: 1,
-      name: 'Hombre',
+      name: 'Ver tiempos reportados',
       color: '#3ABCB1',
       icon: 'fas fa-tag',
     },
     {
       id: 2,
-      name: 'Outlet',
+      name: 'Crear actividades',
       color: '#EB5E3E',
       icon: 'fab fa-cloudsmith',
     },
@@ -46,7 +52,9 @@ export class LandingComponent implements OnInit {
   }
 
   login = () => {
-    window.location.href = `${environment.gcriskUrl}/Login`;
+    if (!this.statusSession) {
+      window.location.href = `${environment.gcriskUrl}/Login`;
+    }
   }
 
   typeClothes = (idCard: any) => {

@@ -1,0 +1,51 @@
+<div class="primary-content primary-typography margin-left-100-rem margin-right-100-rem">
+  <div class="l12 display-flex justify-content-space-between">
+    <h3 class="title-style margin-top-50-rem cl-quaternary-background-palette-important margin-left-100-rem ">Welcome to
+      Prueba</h3>
+    <div class="col s2 m6 margin-top-50-rem">
+      <button class="primary-button button-md" (click)="login('logOut')">
+        Cerrar sesión
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <ng-container *ngFor="let card of listCards; index as i">
+      <div class="col s12 m6 l4 margin-bottom-100-rem">
+        <div class="primary-card display-flex align-items-center border-card hoverable-card" (click)="login()"
+          [ngStyle]="{'border-color':card.color + '66',
+          background: card.color + '66' }">
+          <i [class]="card.icon + ' margin-right-100-rem'" [ngStyle]="{ color: card.color }"></i>
+          <p class="text-style margin-vertical-0 lower-font font-weight-700-important cl-primary-color-theme-important">
+            {{ card.name }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="l12 display-flex margin-top-50-rem">
+    <div class="s12">
+      <p class="text-style lower-font cl-primary-color-theme-important margin-vertical-0">Lorem, ipsum dolor sit amet
+        consectetur adipisicing elit. Dicta, numquam enim? Quis
+        accusantium
+        commodi vero ut
+        molestias modi ea quidem ullam adipisci? Ullam culpa, explicabo a minus impedit possimus omnis?
+        <br><br>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae eligendi, numquam fugiat laborum vitae
+        deleniti animi. Architecto incidunt itaque perspiciatis debitis? Quae reprehenderit officia quia sequi nulla
+        eligendi aliquid voluptatibus?
+      </p>
+    </div>
+    <div class="s12 margin-left-100-rem center-all">
+      <div class="primary-card">
+        <h1 class="subtitle-style cl-primary-color-theme-important">Card</h1>
+        <h1 class="subtitle-style">Imagen</h1>
+        <p class="text-style lower-font">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae quas,
+          provident fugiat harum laudantium est
+          architecto corrupti vel voluptates odio dignissimos fugit aperiam ratione mollitia, temporibus eos ea quasi
+          officiis?</p>
+      </div>
+    </div>
+  </div>
+</div>
