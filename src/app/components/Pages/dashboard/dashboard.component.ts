@@ -31,16 +31,16 @@ export class DashboardComponent implements OnInit {
   public listCards = [
     {
       id: 0,
-      name: 'Ver actividades',
-      color: '#9F84F9',
-      icon: 'fas fa-percent',
-    },
-    {
-      id: 1,
       name: 'Crear actividades',
       color: '#EB5E3E',
       icon: 'fab fa-cloudsmith',
     },
+    {
+      id: 1,
+      name: 'Ver actividades',
+      color: '#9F84F9',
+      icon: 'fas fa-percent',
+    }
   ];
 
   /** Id del card seleccionado */
@@ -118,8 +118,7 @@ export class DashboardComponent implements OnInit {
       const params = new FormData();
       params.append('id_usuario', localStorage.getItem('id_usuario'));
       params.append('descripcion', this.formCreateAct.value.descripcion);
-      params.append('tiempo', this.formCreateAct.value.tiempoActividad);
-      console.log(this.formCreateAct.value);
+      params.append('tiempo', JSON.stringify(this.formCreateAct.value.tiempoActividad));
 
       this.activities.save(params).subscribe((response: any) => {
         this.getInfo();

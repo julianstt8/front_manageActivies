@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['Dashboard'], { relativeTo: this.route });
         } else {
           this.formLogin.reset();
-          this.toast.setToastPopup('Usuario no registrado.', 'danger');
+          this.toast.setToastPopup('Usuario o contraseña incorrecta.', 'danger');
         }
       })
     } else {
