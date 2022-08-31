@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from "src/environments/environment";
 
 import { SwalPopupService } from 'src/app/services/LocalServices/swal-popup.service';
-import { HeroesService } from "src/app/services/heroes.service";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -45,23 +45,17 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private toast: SwalPopupService,
-    private auth: HeroesService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
+  /** Redirecciona a el inicio de sesion */
   login = () => {
     if (!this.statusSession) {
-      window.location.href = `${environment.gcriskUrl}/Login`;
+      this.router.navigate(['Login'], { relativeTo: this.route });
     }
   }
-
-  typeClothes = (idCard: any) => {
-    this.auth.validateUser().subscribe((response) => {
-      console.log(response);
-      this.toast.setToastPopup('entrea' + response, 'success')
-    })
-  }
-
 }

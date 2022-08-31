@@ -1,5 +1,7 @@
-import { Routes, RouterModule } from '@angular/router';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { LandingComponent } from './landing/landing.component';
@@ -15,7 +17,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule.forChild(routes)],
   declarations: [COMPONENTS],
 })
 

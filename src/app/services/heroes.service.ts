@@ -11,7 +11,9 @@ export class HeroesService {
 
   constructor(private http: HttpClient) { }
 
-  public validateUser = () =>
-    this.http.get(`${this.url}/validateUser`);
+  /** Valida que el usuario exista para iniciar sesion */
+  public validateUser = (params) => this.http.post(`${this.url}/validateUser`, params);
+  /** Crea un usuario */
+  public createUser = (params) => this.http.post(`${this.url}/createUser`, params);
 
 }

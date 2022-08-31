@@ -1,17 +1,19 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'Dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) },
 ];
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
-    CommonModule, RouterModule.forChild(routes)
+    CommonModule, ReactiveFormsModule, FormsModule, RouterModule.forChild(routes)
   ]
 })
 export class LoginModule { }
