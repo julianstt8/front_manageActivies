@@ -1,3 +1,7 @@
+# Clonar especificamente rama f_julian
+
+git clone --branch f_julian https://github.com/julianstt8/manageActiviesFront.git
+
 # Instalaciones ANGULAR
 
 Node 16.16.0
