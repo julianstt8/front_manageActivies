@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
+import { AuthGuard } from '../../auth.guard';
+
 import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [

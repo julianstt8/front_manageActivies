@@ -27,6 +27,8 @@ export class DashboardComponent implements OnInit {
 
   /** Almacena la data del usuario logueado */
   public allActivities = [];
+  public dataOrganice = [];
+
   /** Listado de cards a mostrar */
   public listCards = [
     {
@@ -58,7 +60,6 @@ export class DashboardComponent implements OnInit {
     this.initForms();
     this.getInfo();
   }
-
 
   /** Inicializa los formularios */
   initForms = () => {
@@ -95,6 +96,7 @@ export class DashboardComponent implements OnInit {
     this.activities.getActivities(params).subscribe((response) => {
       if (response['status'] === 1) {
         this.allActivities = response['data'];
+        this.organiceData();
       } else {
         this.toast.setToastPopup('Ha ocurrido un error, comunicate con un asesor', 'danger');
       }
@@ -114,22 +116,47 @@ export class DashboardComponent implements OnInit {
   /** Almacena las actividades */
   saveActivities = () => {
     if (this.formCreateAct.valid) {
-      this.toast.showModalLoading('Guardando');
-      const params = new FormData();
-      params.append('id_usuario', localStorage.getItem('id_usuario'));
-      params.append('descripcion', this.formCreateAct.value.descripcion);
-      params.append('tiempo', JSON.stringify(this.formCreateAct.value.tiempoActividad));
+      if (this.countActivities(this.formCreateAct.value.tiempoActividad) <= 8) {
+        this.toast.showModalLoading('Guardando');
+        const params = new FormData();
+        params.append('id_usuario', localStorage.getItem('id_usuario'));
+        params.append('descripcion', this.formCreateAct.value.descripcion);
+        params.append('tiempo', JSON.stringify(this.formCreateAct.value.tiempoActividad));
 
-      this.activities.save(params).subscribe((response: any) => {
-        this.getInfo();
-        this.formCreateAct.reset();
-        console.log(response);
-        setTimeout(() => {
-          this.toast.closeModalLoading();
-        }, 1000)
-      })
+        this.activities.save(params).subscribe((response: any) => {
+          if (response['status'] === 1) {
+            this.getInfo();
+            this.formCreateAct.reset();
+            setTimeout(() => {
+              this.toast.closeModalLoading();
+            }, 1000)
+          } else {
+            this.toast.setToastPopup('Ha ocurrido un error al guardar, comunicate con un asesor.', 'danger');
+          }
+        })
+      } else {
+        this.toast.setToastPopup('El tiempo limite por actividad es 8, favor validar.', 'danger');
+      }
     } else {
-      this.toast.setToastPopup('Todos los campos son requeridos', 'danger');
+      this.toast.setToastPopup('Todos los campos con * son requeridos.', 'danger');
     }
+  }
+
+  /** Cuenta que las horas de actividad no sean mayores a 8 */
+  countActivities = (activities) => {
+    let tiempo = 0;
+    activities.map((elm) => { return tiempo = tiempo + elm.tiempo });
+    return tiempo;
+  }
+
+  /** Organizar la data a mostar */
+  organiceData = () => {
+    let activities = [];
+    // this.dataOrganice.push(this.allActivities.filter(n => n.id_actividad == elm.id_actividad))
+    this.allActivities.forEach((elm) => {
+       activities.push(elm.id_actividad);
+    })
+    console.log(activities);
+
   }
 }

@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.destroyLocalStorage();
     this.initForms();
   }
 
@@ -46,14 +47,18 @@ export class LoginComponent implements OnInit {
 
   /** Valida el inicio de sesion del usuario */
   login = () => {
+    this.toast.showModalLoading('Cargando...');
     if (this.formLogin.valid) {
       this.user.validateUser(this.formLogin.value).subscribe((response) => {
         if (response['status'] === 1) {
           localStorage.setItem('usuario', this.formLogin.value.usuario);
-          localStorage.setItem('id_usuario', response['data'][0])
-          localStorage.setItem('nombre_completo', response['data'][1])
+          localStorage.setItem('id_usuario', response['data'][0]);
+          localStorage.setItem('nombre_completo', response['data'][1]);
           this.statusCreateUser = false;
-          this.router.navigate(['Dashboard'], { relativeTo: this.route });
+          setTimeout(() => {
+            this.router.navigate(['Dashboard']);
+            this.toast.closeModalLoading();
+          }, 3000)
         } else {
           this.formLogin.reset();
           this.toast.setToastPopup('Usuario o contraseña incorrecta.', 'danger');
@@ -86,6 +91,10 @@ export class LoginComponent implements OnInit {
   /** Retorna al landing */
   goBack = () => {
     this.router.navigate([''], { relativeTo: this.route });
+  }
+
+  destroyLocalStorage = () => {
+    localStorage.clear();
   }
 
 }
