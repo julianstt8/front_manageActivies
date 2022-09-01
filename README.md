@@ -5,7 +5,8 @@ git clone --branch f_julian https://github.com/julianstt8/manageActiviesFront.gi
 # Instalaciones ANGULAR
 
 Node 16.16.0
-Angular CLI version 13.3.0.
+Angular CLI 
+version 13.3.0.
 
 ## Instalar dependencias
 
