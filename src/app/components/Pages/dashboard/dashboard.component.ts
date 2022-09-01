@@ -26,8 +26,8 @@ export class DashboardComponent implements OnInit {
   public nameUser = localStorage.getItem('nombre_completo');
 
   /** Almacena la data del usuario logueado */
-  public allActivities = [];
-  public dataOrganice = [];
+  public allActivities: any = [];
+  public dataOrganice: any = [];
 
   /** Listado de cards a mostrar */
   public listCards = [
@@ -91,6 +91,7 @@ export class DashboardComponent implements OnInit {
 
   /** Trae toda la informacion del usuario */
   getInfo = () => {
+    this.resetValues();
     const params = new FormData();
     params.append('id_usuario', localStorage.getItem('id_usuario'));
     this.activities.getActivities(params).subscribe((response) => {
@@ -126,7 +127,6 @@ export class DashboardComponent implements OnInit {
         this.activities.save(params).subscribe((response: any) => {
           if (response['status'] === 1) {
             this.getInfo();
-            this.formCreateAct.reset();
             setTimeout(() => {
               this.toast.closeModalLoading();
             }, 1000)
@@ -151,12 +151,35 @@ export class DashboardComponent implements OnInit {
 
   /** Organizar la data a mostar */
   organiceData = () => {
-    let activities = [];
-    // this.dataOrganice.push(this.allActivities.filter(n => n.id_actividad == elm.id_actividad))
+    let activities = {};
     this.allActivities.forEach((elm) => {
-       activities.push(elm.id_actividad);
-    })
-    console.log(activities);
+      if (!activities[elm.id_actividad])
+        this.dataOrganice.push(activities[elm.id_actividad] = {
+          descripcion: elm.descripcion,
+          tiempo_gastado: [this.getHours(elm.id_actividad)],
+          fecha: [this.getTimes(elm.id_actividad)]
+        })
+    });
+    console.log(this.dataOrganice);
+  }
 
+  /** Filtra las fechas por actividad */
+  getTimes = (id_actividad) => {
+    let aux = this.allActivities.filter(n => n.id_actividad === id_actividad);
+    return aux.map((elm) => { return elm.fecha });
+  }
+
+  /** Sumar horas */
+  getHours = (id_actividad) => {
+    let tiempo_gastado: number = 0;
+    // this.allActivities.filter(n => n.id_actividad === id_actividad).forEach(elm => tiempo_gastado += +elm.tiempo_gastado);
+    // this.allActivities.filter(n => n.id_actividad === id_actividad).map(()=>{return elm.tiempo_gastado})
+    return this.allActivities.filter(n => n.id_actividad === id_actividad).map((elm) => { return elm.tiempo_gastado });
+  }
+
+  resetValues = () => {
+    this.formCreateAct.reset();
+    this.allActivities = [];
+    this.dataOrganice = [];
   }
 }

@@ -111,16 +111,24 @@
             <thead>
               <tr>
                 <th class="text-align-center">Actividad</th>
+                <th class="text-align-center">Fecha</th>
                 <th class="text-align-center">Tiempo</th>
-                <th class="text-align-center">Horas</th>
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let item of allActivities">
+              <ng-container *ngFor="let item of dataOrganice">
                 <tr>
                   <td class="text-align-center">{{item.descripcion}}</td>
-                  <td class="text-align-center">{{item.fecha}}</td>
-                  <td class="text-align-center">{{item.tiempo_gastado}}</td>
+                  <td class="text-align-center">
+                    <ng-container *ngFor="let it of item.fecha[0]">
+                      <p>{{it}}</p>
+                    </ng-container>
+                  </td>
+                  <td class="text-align-center">
+                    <ng-container *ngFor="let it of item.tiempo_gastado[0]">
+                      <p>{{it}}</p>
+                    </ng-container>
+                  </td>
                 </tr>
               </ng-container>
               <ng-container *ngIf="allActivities.length === 0">
