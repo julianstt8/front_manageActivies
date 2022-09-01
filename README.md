@@ -1,7 +1,8 @@
 # Instalaciones ANGULAR
 
 Node 16.16.0
-Angular CLI version 13.3.0.
+Angular CLI 
+version 13.3.0.
 
 ## Instalar dependencias
 
